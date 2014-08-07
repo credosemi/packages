@@ -8,13 +8,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=smartsnmpd
-PKG_VERSION:=2014-08-01
+PKG_VERSION:=2014-08-07
 PKG_RELEASE=$(PKG_SOURCE_VERSION)
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/credosemi/smartsnmp.git
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
-PKG_SOURCE_VERSION:=a2028c7150debee2833e7204e6375a91e304058f
+PKG_SOURCE_VERSION:=fb93473d895f058b2d8975d3cfa280ae2a8ae98d
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
 PKG_MIRROR_MD5SUM:=
 
@@ -61,7 +61,7 @@ define Package/smartsnmpd/install
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/lualib/smartsnmp/*.lua $(1)/usr/lib/lua/smartsnmp/
 
 	$(INSTALL_DIR) $(1)/usr/lib/lua/smartsnmp/mibs
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/mibs/*.lua $(1)/usr/lib/lua/smartsnmp/mibs/
+	$(INSTALL_BIN) ./files/mibs/*.lua $(1)/usr/lib/lua/smartsnmp/mibs/
 
 	$(INSTALL_DIR) $(1)/etc/config
 	$(INSTALL_DATA) ./files/smartsnmpd.conf $(1)/etc/config/smartsnmpd
