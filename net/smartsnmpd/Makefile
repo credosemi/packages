@@ -20,6 +20,8 @@ PKG_MIRROR_MD5SUM:=
 
 
 PKG_MAINTAINER:=Xiongfei Guo <xfguo@credosemi.com>
+PKG_LICENSE:=GPLv2
+PKG_LICENSE_FILES:=LICENSE
 
 
 include $(INCLUDE_DIR)/package.mk
