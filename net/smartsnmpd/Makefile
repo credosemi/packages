@@ -8,7 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=smartsnmpd
-PKG_VERSION:=2014-08-07
+PKG_VERSION:=2014-08-13
 PKG_RELEASE=$(PKG_SOURCE_VERSION)
 
 PKG_SOURCE_PROTO:=git
@@ -20,7 +20,7 @@ PKG_MIRROR_MD5SUM:=
 
 
 PKG_MAINTAINER:=Xiongfei Guo <xfguo@credosemi.com>
-PKG_LICENSE:=GPLv2
+PKG_LICENSE:=GPL-2.0
 PKG_LICENSE_FILES:=LICENSE
 
 
@@ -28,18 +28,20 @@ include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/scons.mk
 
 define Package/smartsnmpd/Default
-	URL:=http://support.credosemi.com/gitlab/nmsgroup/snmp-agent
+	URL:=https://github.com/credosemi/smartsnmp
 endef
 
 define Package/smartsnmpd/Default/description
-		TBD
+    smartsnmpd is an implementation of SNMP Agent. Its goal is "Easily writing boring SNMP MIB with Lua".
+    This package add native support for OpenWrt. Include using ubus and uci to get system info/status. 
+    And, it use libubox/uloop as low level event-driven library.
 endef
 
 define Package/smartsnmpd
 	$(call Package/smartsnmpd/Default)
 	SECTION:=net
 	CATEGORY:=Network
-	DEPENDS+=+lua +liblua +libubox +libuci-lua
+	DEPENDS+=+lua +liblua +libubox +libuci-lua +libubus-lua
 	TITLE:=Smart-SNMP (Agent)
 endef
 
