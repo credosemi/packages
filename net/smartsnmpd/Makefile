@@ -27,22 +27,19 @@ PKG_LICENSE_FILES:=LICENSE
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/scons.mk
 
-define Package/smartsnmpd/Default
-	URL:=https://github.com/credosemi/smartsnmp
-endef
-
-define Package/smartsnmpd/Default/description
-    smartsnmpd is an implementation of SNMP Agent. Its goal is "Easily writing boring SNMP MIB with Lua".
-    This package add native support for OpenWrt. Include using ubus and uci to get system info/status. 
-    And, it use libubox/uloop as low level event-driven library.
-endef
-
 define Package/smartsnmpd
-	$(call Package/smartsnmpd/Default)
-	SECTION:=net
-	CATEGORY:=Network
-	DEPENDS+=+lua +liblua +libubox +libuci-lua +libubus-lua
-	TITLE:=Smart-SNMP (Agent)
+  SECTION:=net
+  CATEGORY:=Network
+  DEPENDS+=+lua +liblua +libubox +libuci-lua +libubus-lua
+  TITLE:=Smart-SNMP (Agent)
+  URL:=https://github.com/credosemi/smartsnmp
+endef
+
+define Package/smartsnmpd/description
+smartsnmpd is an implementation of SNMP Agent. Its goal is "Easily
+writing boring SNMP MIB with Lua". This package add native support
+for OpenWrt. Include using ubus and uci to get system info/status. 
+And, it use libubox/uloop as low level event-driven library.
 endef
 
 SCONS_OPTIONS += --transport=uloop
@@ -66,13 +63,12 @@ define Package/smartsnmpd/install
 
 	$(INSTALL_DIR) $(1)/usr/lib/lua/smartsnmp/mibs
 	$(INSTALL_BIN) ./files/mibs/*.lua $(1)/usr/lib/lua/smartsnmp/mibs/
-
+	
 	$(INSTALL_DIR) $(1)/etc/config
 	$(INSTALL_DATA) ./files/smartsnmpd.conf $(1)/etc/config/smartsnmpd
 
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_BIN) ./files/smartsnmpd.init $(1)/etc/init.d/smartsnmpd
-
 endef
 
 $(eval $(call BuildPackage,smartsnmpd))
